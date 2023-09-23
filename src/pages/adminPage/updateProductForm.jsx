@@ -1,14 +1,16 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import "./addProductForm.css";
+import "./updateProductForm.css";
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
 
 
-export const AddProductForm = () => {
+export const UpdateProductForm = (props) => {
 
-    const schema = yup.object().shape({
+    const { id, name, description, price, details, imageLink } = props.data;
+
+    const updateSchema = yup.object().shape({
         name: yup
             .string()
             .required("You must add a title."),
@@ -31,21 +33,22 @@ export const AddProductForm = () => {
         handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(updateSchema),
     });
 
 
     const onCreatePost = async (data) => {
-       console.log(data);
+        console.log(data);
+        let ret = data;
+        ret.id = id;
 
-
-       Axios.post("http://localhost:8081/products", data)
-           .then((response) => {
-               // Handle the successful response here
-               console.log('Response:', response.data);
-           })
-           .catch(error =>
-               console.error(error));
+        Axios.put("http://localhost:8081/products", ret)
+            .then((response) => {
+                // Handle the successful response here
+                console.log('Response:', response.data);
+            })
+            .catch(error =>
+                console.error(error));
 
         window.location.reload();
     };
@@ -54,10 +57,10 @@ export const AddProductForm = () => {
         <div className={"create-post"}>
             <form onSubmit={handleSubmit(onCreatePost)}>
                 <div className="form-group">
-                    <input placeholder="Name..." {...register("name")} />
+                    <input placeholder={name} {...register("name")} value={name} />
                     <p style={{ color: "red" }}> {errors.name?.message}</p>
 
-                    <input placeholder="Price... €" {...register("price")}  />
+                    <input placeholder={price} {...register("price")} value={price} />
                     <p style={{ color: "red" }}> {errors.price?.message}</p>
 
                     <select id="auswahlelement" {...register("imageLink")}>
@@ -68,7 +71,7 @@ export const AddProductForm = () => {
                     </select>
                     <p style={{ color: "red" }}> {errors.imageLink?.message}</p>
 
-                    <textarea placeholder="Description..." {...register("description")} />
+                    <textarea placeholder={description} {...register("description")} value={description}/>
 
                     <textarea placeholder="Details..." {...register("details")} />
                 </div>

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
+import {Image} from "../image";
 
 
 export const Product = (props) => {
@@ -7,21 +8,10 @@ export const Product = (props) => {
   const { addToCart, cartItems } = useContext(ShopContext);
 
   const cartItemCount = cartItems[id];
-  let img
-
-  switch(imageLink){
-      case "1": img = require("../../assets/products/1.png")
-          break;
-      case "2": img = require("../../assets/products/2.png")
-          break;
-      default:
-          break;
-  }
-
 
   return (
     <div className="product">
-      <img src={img} alt={description}/>
+        <Image data={[imageLink, description]}></Image>
       <div className="description">
         <p>
           <b>{name}</b>

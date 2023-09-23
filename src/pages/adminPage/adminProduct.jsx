@@ -1,34 +1,49 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
+import Axios from "axios";
+import {Image} from "../image";
+import {UpdateProductForm} from "./updateProductForm";
 
 export const AdminProduct = (props) => {
     const { id, name, description, price, details, imageLink } = props.data;
 
-    let img
+    const onDelete = async (data) => {
+        console.log(data);
 
-    switch(imageLink){
-        case "1": img = require("../../assets/products/1.png")
-            break;
-        case "2": img = require("../../assets/products/2.png")
-            break;
-        default:
-            break;
-    }
 
+        Axios.delete("http://localhost:8081/products/"+data)
+            .then((response) => {
+                console.log('Response:', response.data);
+            })
+            .catch(error =>
+                console.error(error));
+
+        window.location.reload();
+    };
+
+    const [showForm, setShowForm] = useState(false);
+
+    const handleUpdateButtonClick = () => {
+        // Set showForm to true when the button is clicked
+        setShowForm(!showForm);
+    };
 
     return (
         <div className="product">
-            <img src={img} alt={description}/>
+            <Image data={[imageLink, description]}></Image>
             <div className="description">
                 <p>
                     <b>{name}</b>
                 </p>
                 <p> ${price}</p>
             </div>
+            {showForm && (
+                <UpdateProductForm data={props.data}></UpdateProductForm>
+            )}
             <div className="buttonBox">
-                <button className="updateBttn" >
+                <button className="updateBttn" onClick={handleUpdateButtonClick}>
                     Update Product
                 </button>
-                <button className="deleteBttn" >
+                <button className="deleteBttn" onClick={() => onDelete(id)}>
                     Delete Product
                 </button>
             </div>
