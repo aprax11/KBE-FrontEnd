@@ -1,5 +1,6 @@
 import React from "react";
 import {AdminProduct} from "./adminProduct";
+import {AddProductForm} from "./addProductForm";
 import "./adminPage.css";
 
 export const AdminPage = (props) => {
@@ -8,7 +9,9 @@ export const AdminPage = (props) => {
             <div className="shopTitle">
                 <h1>Admin Page</h1>
             </div>
-
+            <div>
+                <AddProductForm></AddProductForm>
+            </div>
             <div className="products">
                 {props.data.map((adminProduct) => (
                     <AdminProduct data={adminProduct} />
