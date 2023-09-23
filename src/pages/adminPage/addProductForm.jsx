@@ -3,7 +3,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import "./addProductForm.css";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import Axios from "axios";
 
 
 export const AddProductForm = () => {
@@ -39,7 +40,16 @@ export const AddProductForm = () => {
     const onCreatePost = async (data) => {
        console.log(data);
 
-        navigate("/");
+
+       Axios.post("http://localhost:8081/products", data)
+           .then((response) => {
+               // Handle the successful response here
+               console.log('Response:', response.data);
+           })
+           .catch(error =>
+               console.error(error));
+
+        window.location.reload();
     };
 
     return (
