@@ -1,20 +1,27 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
-import pic from "../../assets/products/1.png";
 
 
 export const Product = (props) => {
-  const { id, name, description, price, details, count, imageLink } = props.data;
+  const { id, name, description, price, details, imageLink } = props.data;
   const { addToCart, cartItems } = useContext(ShopContext);
 
   const cartItemCount = cartItems[id];
+  let img
 
-
+  switch(imageLink){
+      case "1": img = require("../../assets/products/1.png")
+          break;
+      case "2": img = require("../../assets/products/2.png")
+          break;
+      default:
+          break;
+  }
 
 
   return (
     <div className="product">
-      <img src={require("../../assets/products/1.png")} />
+      <img src={img} alt={description}/>
       <div className="description">
         <p>
           <b>{name}</b>
