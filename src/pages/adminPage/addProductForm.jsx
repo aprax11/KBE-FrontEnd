@@ -62,8 +62,8 @@ export const AddProductForm = () => {
 
                     <select id="auswahlelement" {...register("imageLink")}>
                         <option disabled selected hidden>Select a Type</option>
-                        <option value="2">Necklace</option>
-                        <option value="1">Ring </option>
+                        <option value="1">Necklace</option>
+                        <option value="2">Ring </option>
                         <option value="3">Earring</option>
                     </select>
                     <p style={{ color: "red" }}> {errors.imageLink?.message}</p>

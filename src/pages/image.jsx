@@ -3,11 +3,11 @@ export const Image = (props) => {
     let img
 
     switch(props.data[0]){
-        case "1": img = require("../assets/products/1.png")
+        case "1": img = require("../assets/products/1.jpg")
             break;
         case "2": img = require("../assets/products/2.png")
             break;
-        case "3": img = require("../assets/products/3.png")
+        case "3": img = require("../assets/products/3.jpg")
             break;
         default:
             break;

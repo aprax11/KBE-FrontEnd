@@ -10,7 +10,17 @@ export const InspectProductForm = (props) => {
 
     const { id, name, description, price, details, imageLink } = props.data;
 
-
+    let type;
+    switch(imageLink){
+        case "1": type="Necklace";
+            break
+        case "2": type="Ring";
+            break
+        case "3": type="Earring";
+            break
+        default: type="Item";
+            break
+    }
     return (
         <div className="create-post">
             <form>
@@ -21,7 +31,7 @@ export const InspectProductForm = (props) => {
                 <input   value={price}  readOnly={true}/>
                 <label>Type:</label>
                 <select >
-                    <option disabled selected>Kette</option>
+                    <option disabled selected>{type}</option>
 
                 </select>
                 <label>Description:</label>

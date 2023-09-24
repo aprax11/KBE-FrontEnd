@@ -63,7 +63,7 @@ export const UpdateProductForm = (props) => {
         // Update the inputValue state when the user types
         setPriceValue(e.target.value);
     };
-    const [descriptionValue, setDescriptionValue] = useState(price);
+    const [descriptionValue, setDescriptionValue] = useState(description);
     const handleDescriptionChange = (e) => {
         // Update the inputValue state when the user types
         setDescriptionValue(e.target.value);
@@ -80,8 +80,8 @@ export const UpdateProductForm = (props) => {
 
                 <select id="auswahlelement" {...register("imageLink")}>
                     <option disabled selected hidden>Select a Type</option>
-                    <option value="2">Necklace</option>
-                    <option value="1">Ring </option>
+                    <option value="1">Necklace</option>
+                    <option value="2">Ring </option>
                     <option value="3">Earring</option>
                 </select>
                 <p style={{ color: "red" }}> {errors.imageLink?.message}</p>
