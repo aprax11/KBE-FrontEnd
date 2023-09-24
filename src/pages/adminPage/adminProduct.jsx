@@ -29,13 +29,18 @@ export const AdminProduct = (props) => {
 
     return (
         <div className="product">
-            <Image data={[imageLink, description]}></Image>
-            <div className="description">
-                <p>
-                    <b>{name}</b>
-                </p>
-                <p> ${price}</p>
-            </div>
+            {!showForm && (
+                <Image data={[imageLink, description]}></Image>
+
+            )}
+            {!showForm && (
+                <div className="description">
+                    <p>
+                        <b>{name}</b>
+                    </p>
+                    <p> ${price}</p>
+                </div>
+            )}
             {showForm && (
                 <UpdateProductForm data={props.data}></UpdateProductForm>
             )}

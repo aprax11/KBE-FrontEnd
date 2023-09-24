@@ -38,9 +38,10 @@ export const UpdateProductForm = (props) => {
 
 
     const onCreatePost = async (data) => {
-        console.log(data);
         let ret = data;
         ret.id = id;
+
+        console.log(ret);
 
         Axios.put("http://localhost:8081/products", ret)
             .then((response) => {
@@ -52,29 +53,42 @@ export const UpdateProductForm = (props) => {
 
         window.location.reload();
     };
-
+    const [nameValue, setNameValue] = useState(name);
+    const handleNameChange = (e) => {
+        // Update the inputValue state when the user types
+        setNameValue(e.target.value);
+    };
+    const [priceValue, setPriceValue] = useState(price);
+    const handlePriceChange = (e) => {
+        // Update the inputValue state when the user types
+        setPriceValue(e.target.value);
+    };
+    const [descriptionValue, setDescriptionValue] = useState(price);
+    const handleDescriptionChange = (e) => {
+        // Update the inputValue state when the user types
+        setDescriptionValue(e.target.value);
+    };
     return (
-        <div className={"create-post"}>
+        <div className="create-post">
             <form onSubmit={handleSubmit(onCreatePost)}>
-                <div className="form-group">
-                    <input placeholder={name} {...register("name")} value={name} />
-                    <p style={{ color: "red" }}> {errors.name?.message}</p>
 
-                    <input placeholder={price} {...register("price")} value={price} />
-                    <p style={{ color: "red" }}> {errors.price?.message}</p>
+                <input  {...register("name")} value={nameValue} onChange={handleNameChange} />
+                <p style={{ color: "red" }}> {errors.name?.message}</p>
 
-                    <select id="auswahlelement" {...register("imageLink")}>
-                        <option disabled selected hidden>Select a Type</option>
-                        <option value="2">Necklace</option>
-                        <option value="1">Ring </option>
-                        <option value="3">Earring</option>
-                    </select>
-                    <p style={{ color: "red" }}> {errors.imageLink?.message}</p>
+                <input  {...register("price")} value={priceValue} onChange={handlePriceChange}  />
+                <p style={{ color: "red" }}> {errors.price?.message}</p>
 
-                    <textarea placeholder={description} {...register("description")} value={description}/>
+                <select id="auswahlelement" {...register("imageLink")}>
+                    <option disabled selected hidden>Select a Type</option>
+                    <option value="2">Necklace</option>
+                    <option value="1">Ring </option>
+                    <option value="3">Earring</option>
+                </select>
+                <p style={{ color: "red" }}> {errors.imageLink?.message}</p>
 
-                    <textarea placeholder="Details..." {...register("details")} />
-                </div>
+                <textarea placeholder={description} {...register("description")} value={descriptionValue} onChange={handleDescriptionChange}/>
+
+                <textarea placeholder="Details..." {...register("details")} />
 
                 <input type="submit" className="submitForm" />
             </form>

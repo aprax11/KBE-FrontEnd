@@ -23,13 +23,17 @@ form {
 
 }
 .form-group {
-    display: block;
     margin-bottom: 10px;
+    flex-direction: row;
+    display: flex;
+    justify-content: center; /* Horizontally center items */
+    align-items: center;
 }
 
 input,
 textarea,
-select{
+select,
+label{
     padding: 8px 10px;
     margin: 3px 8px 16px 8px;
     background-color: rgba(222, 239, 248, 0.877);
