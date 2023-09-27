@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { ShopContext } from "../../context/shop-context";
 import {Image} from "../image";
 import {InspectProductForm} from "./inpectProductForm";
@@ -6,9 +6,14 @@ import {InspectProductForm} from "./inpectProductForm";
 
 export const Product = (props) => {
   const { id, name, description, price, details, imageLink } = props.data;
-  const { addToCart, cartItems } = useContext(ShopContext);
+  const { addToCart, cartItems, getAmmountOfItemInCart, updateCartItemCount } = useContext(ShopContext);
 
-  const cartItemCount = cartItems[id];
+
+    useEffect(() => {
+        updateCartItemCount();
+    }, []);
+
+  const cartItemCount = getAmmountOfItemInCart(id);
 
   const [showForm, setShowForm] = useState(false);
   const handleInfoButtonClick = () => {
@@ -36,7 +41,7 @@ export const Product = (props) => {
             <button className="infoBttn" onClick={handleInfoButtonClick}>
                 Inspect Product
             </button>
-            <button className="addToCartBttn" onClick={() => addToCart(id)}>
+            <button className="addToCartBttn" onClick={() => addToCart(props)}>
                 Add To Cart {cartItemCount > 0 && <> ({cartItemCount})</>}
             </button>
         </div>

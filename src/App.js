@@ -15,6 +15,7 @@ function App() {
   useEffect(() => {
     Axios.get("http://localhost:8081/allProducts").then((res) => setData(res.data))
         .catch(error => console.error(error));
+
   }, []);
 
   return (

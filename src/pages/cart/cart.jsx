@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 import "./cart.css";
 export const Cart = () => {
   const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
-  const totalAmount = getTotalCartAmount();
+
+  const totalAmount = cartItems.totalPrice;
 
   const navigate = useNavigate();
-    const PRODUCTS = []
+    let cart
   return (
     <div className="cart">
       <div>
@@ -17,10 +18,10 @@ export const Cart = () => {
       </div>
       <div className="cart">
 
-        {PRODUCTS.map((product) => {
-          if (cartItems[product.id] !== 0) {
+        {cartItems.products.map((product) => {
+
             return <CartItem data={product} />;
-          }
+
         })}
 
       </div>

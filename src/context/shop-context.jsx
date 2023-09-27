@@ -1,39 +1,78 @@
 import { createContext, useEffect, useState } from "react";
+import Axios from "axios";
 
 export const ShopContext = createContext(null);
 
+
+
 const getDefaultCart = () => {
-  let cart = {};
-  for (let i = 1; i < 2 + 1; i++) {
-    cart[i] = 0;
-  }
-  return cart;
+  const userId = "d6e38053-872d-4d4a-b9e5-ce48cd749e62";
+  let data;
+
+
+  return {userId: "null", products: [], totalPrice: 0}
 };
 
 export const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart());
 
   const getTotalCartAmount = () => {
-    let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-       // let itemInfo = PRODUCTS.find((product) => product.id === Number(item));
-        //totalAmount += cartItems[item] * itemInfo.price;
-      }
-    }
-    return totalAmount;
+
+    return cartItems.totalPrice;
   };
 
-  const addToCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+  const getAmmountOfItemInCart = (id) => {
+
+    return cartItems.products.filter(item => item.id.toString()===id.toString()).map(x => x.count)[0]
+  }
+  const addToCart = (product) => {
+
+    const userId = "d6e38053-872d-4d4a-b9e5-ce48cd749e62";
+    let realProduct = product.data
+    realProduct.image = "1";
+    const basketComponent = {userId: userId, product: realProduct};
+
+    updateCartItemCount()
+
+      Axios.put("http://localhost:8081/basket/add", basketComponent)
+          .then((response) => {
+            // Handle the successful response here
+            console.log('Response from adding to cart: ', response.data);
+          })
+          .catch(error =>
+              console.log('tried to send Putrequest')
+          );
+
+
+
+    updateCartItemCount()
+    console.log(cartItems);
+  }
+
+  const removeFromCart = (product, userId) => {
+    const basketComponent = {product: product , userId: userId.toString()};
+
+    Axios.put("http://localhost:8081/basket/delete", basketComponent)
+        .then((response) => {
+          // Handle the successful response here
+          console.log('Response from deleting from cart:', response.data);
+        })
+        .catch(error =>
+            console.error(error));
+
+    Axios.get("http://localhost:8081/basket/"+userId).then((res) => setCartItems(res.data))
+        .catch(error => console.error(error));
   };
 
-  const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-  };
+  const updateCartItemCount = () => {
+    const userId = "d6e38053-872d-4d4a-b9e5-ce48cd749e62";
 
-  const updateCartItemCount = (newAmount, itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
+    Axios.get("http://localhost:8081/basket/" + userId).then((res) => setCartItems(res.data))
+        .catch(error => console.log('tried to send Getrequest'));
+
+    console.log(cartItems)
+
+
   };
 
   const checkout = () => {
@@ -47,6 +86,7 @@ export const ShopContextProvider = (props) => {
     removeFromCart,
     getTotalCartAmount,
     checkout,
+    getAmmountOfItemInCart,
   };
 
   return (
