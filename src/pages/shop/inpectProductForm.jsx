@@ -8,10 +8,10 @@ import Axios from "axios";
 
 export const InspectProductForm = (props) => {
 
-    const { id, name, description, price, details, imageLink } = props.data;
+    const { id, name, description, price, details, image } = props.data;
 
     let type;
-    switch(imageLink){
+    switch(image){
         case "1": type="Necklace";
             break
         case "2": type="Ring";

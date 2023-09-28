@@ -8,7 +8,7 @@ import Axios from "axios";
 
 export const UpdateProductForm = (props) => {
 
-    const { id, name, description, price, details, imageLink } = props.data;
+    const { id, name, description, price, details, image } = props.data;
 
     const updateSchema = yup.object().shape({
         name: yup
@@ -22,7 +22,7 @@ export const UpdateProductForm = (props) => {
             .string(),
         details: yup
             .string(),
-        imageLink: yup
+        image: yup
             .string()
             .notOneOf(['Select a Type'], 'Please select a type.')
 
@@ -78,13 +78,13 @@ export const UpdateProductForm = (props) => {
                 <input  {...register("price")} value={priceValue} onChange={handlePriceChange}  />
                 <p style={{ color: "red" }}> {errors.price?.message}</p>
 
-                <select id="auswahlelement" {...register("imageLink")}>
+                <select id="auswahlelement" {...register("image")}>
                     <option disabled selected hidden>Select a Type</option>
                     <option value="1">Necklace</option>
                     <option value="2">Ring </option>
                     <option value="3">Earring</option>
                 </select>
-                <p style={{ color: "red" }}> {errors.imageLink?.message}</p>
+                <p style={{ color: "red" }}> {errors.image?.message}</p>
 
                 <textarea placeholder={description} {...register("description")} value={descriptionValue} onChange={handleDescriptionChange}/>
 
