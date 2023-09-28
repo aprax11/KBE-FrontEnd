@@ -9,19 +9,19 @@ export const CartItem = (props) => {
 
   return (
     <div className="cartItem">
-      <Image data={"2"}></Image>
+      <Image data={image}></Image>
       <div className="description">
         <p>
           <b>{name}</b>
         </p>
         <p> Price: ${price}</p>
         <div className="countHandler">
-          <button onClick={() => removeFromCart(id)}> - </button>
+          <button onClick={() => removeFromCart(props.data)}> - </button>
           <input
             value={count}
-            onChange={(e) => updateCartItemCount(Number(e.target.value), id)}
+            readOnly={true}
           />
-          <button onClick={() => addToCart(id)}> + </button>
+          <button onClick={() => addToCart(props.data)}> + </button>
         </div>
       </div>
     </div>

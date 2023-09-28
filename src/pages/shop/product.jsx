@@ -5,7 +5,7 @@ import {InspectProductForm} from "./inpectProductForm";
 
 
 export const Product = (props) => {
-  const { id, name, description, price, details, imageLink } = props.data;
+  const { id, name, description, price, details, image } = props.data;
   const { addToCart, cartItems, getAmmountOfItemInCart, updateCartItemCount } = useContext(ShopContext);
 
 
@@ -22,7 +22,7 @@ export const Product = (props) => {
   return (
     <div className="product">
         {!showForm && (
-            <Image data={[imageLink, description]}></Image>
+            <Image data={[image, description]}></Image>
         )}
         {!showForm && (
             <div className="description">
@@ -41,7 +41,7 @@ export const Product = (props) => {
             <button className="infoBttn" onClick={handleInfoButtonClick}>
                 Inspect Product
             </button>
-            <button className="addToCartBttn" onClick={() => addToCart(props)}>
+            <button className="addToCartBttn" onClick={() => addToCart(props.data)}>
                 Add To Cart {cartItemCount > 0 && <> ({cartItemCount})</>}
             </button>
         </div>

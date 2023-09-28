@@ -28,29 +28,30 @@ export const ShopContextProvider = (props) => {
   const addToCart = (product) => {
 
     const userId = "d6e38053-872d-4d4a-b9e5-ce48cd749e62";
-    let realProduct = product.data
-    realProduct.image = "1";
-    const basketComponent = {userId: userId, product: realProduct};
+
+
+    const basketComponent = {userId: userId, product: product};
 
     updateCartItemCount()
 
-      Axios.put("http://localhost:8081/basket/add", basketComponent)
-          .then((response) => {
-            // Handle the successful response here
-            console.log('Response from adding to cart: ', response.data);
-          })
-          .catch(error =>
-              console.log('tried to send Putrequest')
-          );
-
-
+    Axios.put("http://localhost:8081/basket/add", basketComponent)
+        .then((response) => {
+          console.log('Response from adding to cart: ', response.data);
+        })
+        .catch(error =>
+            console.log('tried to send Putrequest')
+        );
 
     updateCartItemCount()
     console.log(cartItems);
   }
 
-  const removeFromCart = (product, userId) => {
-    const basketComponent = {product: product , userId: userId.toString()};
+  const removeFromCart = (product) => {
+
+    const userId = "d6e38053-872d-4d4a-b9e5-ce48cd749e62";
+    const basketComponent = {product: product , userId: userId};
+
+    updateCartItemCount()
 
     Axios.put("http://localhost:8081/basket/delete", basketComponent)
         .then((response) => {
@@ -60,8 +61,7 @@ export const ShopContextProvider = (props) => {
         .catch(error =>
             console.error(error));
 
-    Axios.get("http://localhost:8081/basket/"+userId).then((res) => setCartItems(res.data))
-        .catch(error => console.error(error));
+    updateCartItemCount()
   };
 
   const updateCartItemCount = () => {
