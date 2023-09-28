@@ -4,7 +4,7 @@ import {Image} from "../image";
 import {UpdateProductForm} from "./updateProductForm";
 
 export const AdminProduct = (props) => {
-    const { id, name, description, price, details, imageLink } = props.data;
+    const { id, name, description, price, details, image } = props.data;
 
     const onDelete = async (data) => {
         console.log(data);
@@ -30,7 +30,7 @@ export const AdminProduct = (props) => {
     return (
         <div className="product">
             {!showForm && (
-                <Image data={[imageLink, description]}></Image>
+                <Image data={[image, description]}></Image>
 
             )}
             {!showForm && (
