@@ -11,6 +11,8 @@ export const InspectProductForm = (props) => {
     const { id, name, description, price, details, image } = props.data;
 
     let type;
+    console.log("image: {}", image)
+
     switch(image){
         case "1": type="Necklace";
             break

@@ -41,7 +41,7 @@ export const UpdateProductForm = (props) => {
         let ret = data;
         ret.id = id;
 
-        console.log(ret);
+        console.log("creating Item: {}",ret);
 
         Axios.put("http://localhost:8081/products", ret)
             .then((response) => {
@@ -63,6 +63,7 @@ export const UpdateProductForm = (props) => {
         // Update the inputValue state when the user types
         setPriceValue(e.target.value);
     };
+
     const [descriptionValue, setDescriptionValue] = useState(description);
     const handleDescriptionChange = (e) => {
         // Update the inputValue state when the user types

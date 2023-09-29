@@ -20,7 +20,7 @@ export const AddProductForm = () => {
             .string(),
         details: yup
             .string(),
-        imageLink: yup
+        image: yup
             .string()
             .notOneOf(['Select a Type'], 'Please select a type.')
 
@@ -60,13 +60,13 @@ export const AddProductForm = () => {
                     <input placeholder="Price... €" {...register("price")}  />
                     <p style={{ color: "red" }}> {errors.price?.message}</p>
 
-                    <select id="auswahlelement" {...register("imageLink")}>
+                    <select id="auswahlelement" {...register("image")}>
                         <option disabled selected hidden>Select a Type</option>
                         <option value="1">Necklace</option>
                         <option value="2">Ring </option>
                         <option value="3">Earring</option>
                     </select>
-                    <p style={{ color: "red" }}> {errors.imageLink?.message}</p>
+                    <p style={{ color: "red" }}> {errors.image?.message}</p>
 
                     <textarea placeholder="Description..." {...register("description")} />
 

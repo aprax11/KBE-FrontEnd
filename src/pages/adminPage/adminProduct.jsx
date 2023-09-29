@@ -17,7 +17,7 @@ export const AdminProduct = (props) => {
             .catch(error =>
                 console.error(error));
 
-        window.location.reload();
+       window.location.reload();
     };
 
     const [showForm, setShowForm] = useState(false);
