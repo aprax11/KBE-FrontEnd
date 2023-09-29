@@ -17,7 +17,7 @@ export const UpdateProductForm = (props) => {
         price: yup
             .string()
             .required('You must add a price.')
-            .matches(/^\d+€$/, 'The input may only contain numbers and must end with a euro symbol (€).'),
+            .matches(/^[0-9]+$/, 'The input may only contain numbers.'),
         description: yup
             .string(),
         details: yup
@@ -77,7 +77,6 @@ export const UpdateProductForm = (props) => {
     return (
         <div className="create-post">
             <form onSubmit={handleSubmit(onCreatePost)}>
-
                 <input  {...register("name")} value={nameValue} onChange={handleNameChange} />
                 <p style={{ color: "red" }}> {errors.name?.message}</p>
 
