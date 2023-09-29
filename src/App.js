@@ -7,9 +7,13 @@ import { Cart } from "./pages/cart/cart";
 import { AdminPage } from "./pages/adminPage/adminPage";
 import { ShopContextProvider } from "./context/shop-context";
 import {useEffect, useState} from "react";
+import {PrivateRoute} from "./keycloak/privateRoute";
+import {useAuth} from "./keycloak/useAuth";
 import Axios from "axios";
 
 function App() {
+
+  const { isLogin, user, login, logout } = useAuth();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -25,7 +29,13 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Shop data={data}/>} />
-            <Route path="/adminPage" element={<AdminPage data={data} />} />
+            <Route path="/adminPage"
+                   element={
+              <PrivateRoute isLogin={isLogin} login={login()}>
+                <AdminPage data={data} />
+              </PrivateRoute>
+              }
+            />
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>
