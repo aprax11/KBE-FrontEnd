@@ -41,6 +41,11 @@ select{
     z-index: 1;
 }
 
+.submitForm{
+    display: flex;
+    justify-content: center;
+    margin-left: 47%;
+}
 .submitForm:hover {
     cursor: pointer;
 }

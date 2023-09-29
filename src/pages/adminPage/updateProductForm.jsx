@@ -69,6 +69,11 @@ export const UpdateProductForm = (props) => {
         // Update the inputValue state when the user types
         setDescriptionValue(e.target.value);
     };
+    const [detailsValue, setDetailsValue] = useState(details);
+    const handleDetailsChange = (e) => {
+        // Update the inputValue state when the user types
+        setDetailsValue(e.target.value);
+    };
     return (
         <div className="create-post">
             <form onSubmit={handleSubmit(onCreatePost)}>
@@ -89,7 +94,7 @@ export const UpdateProductForm = (props) => {
 
                 <textarea placeholder={description} {...register("description")} value={descriptionValue} onChange={handleDescriptionChange}/>
 
-                <textarea placeholder="Details..." {...register("details")} />
+                <textarea placeholder="Details..." {...register("details")} value={detailsValue} onChange={handleDetailsChange}/>
 
                 <input type="submit" className="submitForm" />
             </form>
