@@ -6,7 +6,7 @@ export const Shop = (props) => {
   return (
     <div className="shop">
       <div className="shopTitle">
-        <h1>KBE Front-End</h1>
+        <h1>Carla Schertel Jewelry</h1>
       </div>
 
       <div className="products">

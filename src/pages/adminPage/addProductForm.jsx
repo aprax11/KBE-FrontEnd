@@ -57,7 +57,7 @@ export const AddProductForm = () => {
                     <input placeholder="Name..." {...register("name")} />
                     <p style={{ color: "red" }}> {errors.name?.message}</p>
 
-                    <input placeholder="Price... €" {...register("price")}  />
+                    <input placeholder="Price..." {...register("price")}  />
                     <p style={{ color: "red" }}> {errors.price?.message}</p>
 
                     <select id="auswahlelement" {...register("image")}>
